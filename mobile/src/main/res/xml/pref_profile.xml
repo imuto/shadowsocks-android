@@ -20,6 +20,7 @@
                 android:inputType="number"
                 android:maxLength="5"
                 app:pref_summaryHasText="%s"
+                android:singleLine="true"
                 android:title="@string/remote_port"/>
         <AutoSummaryEditTextPreference
                 android:inputType="textPassword"
@@ -48,11 +49,6 @@
                 android:entryValues="@array/route_value"
                 android:summary="%s"
                 android:title="@string/route_list"/>
-        <AutoSummaryEditTextPreference
-                android:key="remoteDns"
-                android:icon="@drawable/ic_action_dns"
-                android:title="@string/remote_dns"
-                app:pref_summaryHasText="%s"/>
         <SwitchPreference
                 android:key="isIpv6"
                 android:icon="@drawable/ic_image_looks_6"
@@ -64,8 +60,17 @@
                 android:summary="@string/proxied_apps_summary"
                 android:title="@string/proxied_apps"/>
         <SwitchPreference
-                android:key="isUdpDns"
+                android:key="metered"
+                android:icon="@drawable/ic_device_data_usage"
+                android:summary="@string/metered_summary"
+                android:title="@string/metered"/>
+        <AutoSummaryEditTextPreference
+                android:key="remoteDns"
                 android:icon="@drawable/ic_action_dns"
+                android:title="@string/remote_dns"
+                app:pref_summaryHasText="%s"/>
+        <SwitchPreference
+                android:key="isUdpDns"
                 android:summary="@string/udp_dns_summary"
                 android:title="@string/udp_dns"/>
 
@@ -83,8 +88,16 @@
                 android:key="plugin.configure"
                 android:icon="@drawable/ic_action_settings"
                 android:persistent="false"
+                android:singleLine="true"
                 app:pref_summaryHasText="%s"
                 android:title="@string/plugin_configure"/>
+        <Preference
+                android:key="udpFallback"
+                android:title="@string/udp_fallback"
+                android:summary="@string/plugin_disabled">
+            <intent android:targetPackage="com.github.shadowsocks"
+                    android:targetClass="com.github.shadowsocks.UdpFallbackProfileActivity"/>
+        </Preference>
 
     </PreferenceCategory>
 

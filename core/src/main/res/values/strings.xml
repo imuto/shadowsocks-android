@@ -6,7 +6,6 @@
   <string name="send_email">Send email</string>
 
   <!-- misc -->
-  <string name="advanced">Advanced</string>
   <string name="service_mode">Service mode</string>
   <string name="service_mode_proxy">Proxy only</string>
   <string name="service_mode_vpn">VPN</string>
@@ -17,7 +16,7 @@
   <string name="port_transproxy">Transproxy port</string>
 
   <string name="remote_dns">Remote DNS</string>
-  <string name="traffic">%s↑\t%s↓</string>
+  <string name="traffic">%1$s↑\t%2$s↓</string>
   <string name="stat_summary">Sent: \t\t\t\t\t%3$s\t↑\t%1$s\nReceived: \t%4$s\t↓\t%2$s</string>
   <string name="speed">%s/s</string>
   <string name="connection_test_pending">Check Connectivity</string>
@@ -37,6 +36,8 @@
   <!-- feature category -->
   <string name="ipv6">IPv6 Route</string>
   <string name="ipv6_summary">Redirect IPv6 traffic to remote</string>
+  <string name="metered">Metered Hint</string>
+  <string name="metered_summary">Hint system to treat VPN as metered</string>
   <string name="route_list">Route</string>
   <string name="route_entry_all">All</string>
   <string name="route_entry_bypass_lan">Bypass LAN</string>
@@ -47,7 +48,9 @@
   <string name="proxied_apps">Apps VPN mode</string>
   <string name="proxied_apps_summary">Configure VPN mode for selected apps</string>
   <string name="on">On</string>
-  <string name="bypass_apps">Bypass Mode</string>
+  <string name="off">Off</string>
+  <string name="proxied_apps_mode">Mode</string>
+  <string name="bypass_apps">Bypass</string>
   <string name="bypass_apps_summary">Enable this option to bypass selected apps</string>
   <string name="auto_connect">Auto Connect</string>
   <string name="auto_connect_summary">Enable Shadowsocks on startup</string>
@@ -57,8 +60,10 @@
   <string name="direct_boot_aware_summary">Your selected profile information will be less protected</string>
   <string name="tcp_fastopen_summary">Toggling might require ROOT permission</string>
   <string name="tcp_fastopen_summary_unsupported">Unsupported kernel version: %s &lt; 3.7.1</string>
-  <string name="udp_dns">DNS Forwarding</string>
-  <string name="udp_dns_summary">Forward all DNS requests to remote</string>
+  <string name="tcp_fastopen_failure">Toggle failed</string>
+  <string name="udp_dns">Send DNS over UDP</string>
+  <string name="udp_dns_summary">Requires UDP forwarding on server side</string>
+  <string name="udp_fallback">UDP Fallback</string>
 
   <!-- notification category -->
   <string name="service_vpn">VPN Service</string>
@@ -96,6 +101,7 @@
   <string name="action_export">Export to Clipboard</string>
   <string name="action_import">Import from Clipboard</string>
   <string name="action_import_file">Import from file…</string>
+  <string name="action_replace_file">Replace from file…</string>
   <string name="action_export_msg">Successfully export!</string>
   <string name="action_export_err">Failed to export.</string>
   <string name="action_import_msg">Successfully import!</string>

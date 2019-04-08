@@ -21,10 +21,12 @@
 package com.github.shadowsocks
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.ShortcutManager
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -59,6 +61,13 @@ class ScannerActivity : AppCompatActivity(), BarcodeRetriever {
 
     private lateinit var detector: BarcodeDetector
 
+    private fun fallback() {
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=tw.com.quickmark")))
+        } catch (_: ActivityNotFoundException) { }
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detector = BarcodeDetector.Builder(this)
@@ -71,9 +80,9 @@ class ScannerActivity : AppCompatActivity(), BarcodeRetriever {
             if (dialog == null) {
                 Toast.makeText(this, R.string.common_google_play_services_notification_ticker, Toast.LENGTH_SHORT)
                         .show()
-                finish()
+                fallback()
             } else {
-                dialog.setOnDismissListener { finish() }
+                dialog.setOnDismissListener { fallback() }
                 dialog.show()
             }
             return
@@ -96,7 +105,7 @@ class ScannerActivity : AppCompatActivity(), BarcodeRetriever {
     }
 
     override fun onRetrieved(barcode: Barcode) = runOnUiThread {
-        Profile.findAllUrls(barcode.rawValue, Core.currentProfile).forEach { ProfileManager.createProfile(it) }
+        Profile.findAllUrls(barcode.rawValue, Core.currentProfile?.first).forEach { ProfileManager.createProfile(it) }
         onSupportNavigateUp()
     }
     override fun onRetrievedMultiple(closetToClick: Barcode?, barcode: MutableList<BarcodeGraphic>?) = check(false)
@@ -127,7 +136,7 @@ class ScannerActivity : AppCompatActivity(), BarcodeRetriever {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             REQUEST_IMPORT, REQUEST_IMPORT_OR_FINISH -> if (resultCode == Activity.RESULT_OK) {
-                val feature = Core.currentProfile
+                val feature = Core.currentProfile?.first
                 var success = false
                 for (uri in data!!.datas) try {
                     detector.detect(Frame.Builder().setBitmap(contentResolver.openBitmap(uri)).build())
